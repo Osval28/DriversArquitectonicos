@@ -220,7 +220,6 @@ La interfaz debe prevenir errores del usuario y facilitar su recuperación sin p
 |:---|:---|---:|---:|---:|---:|
 | ESC-CAL-USA-0008 | La interfaz debe prevenir errores y ayudar al usuario a recuperarse con salidas fáciles cuando una acción no pueda completarse o quiera deshacer operaciones sencillas | 0 | 0 | 0 | 0 |
 | ESC-CAL-USA-0009 | Los mensajes de error deben ser suficientemente claros para los usuarios, con descripciones que realmente hagan entender al usuario qué provocó el error | 1 | 1 | 1 | 3 |
-| ESC-CAL-USA-0009 | Los mensajes de error deben ser suficientemente claros para los usuarios, con descripciones que realmente hagan entender al usuario qué provocó el error | 1 | 1 | 1 | 3 |
 
 **CAR-USA-0004**
 La interfaz debe ser consistente entre pantallas y minimizar los recorridos necesarios para las acciones frecuentes
