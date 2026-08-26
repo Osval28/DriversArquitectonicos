@@ -1,7 +1,4 @@
-# Restricciones de Negocio — DAZMA
-
-## Resumen
-
+# Restricciones de Negocio
 | # | Tipo | Restricción de negocio |
 |---:|:---|:---|
 | 1 | Legal | La plataforma debe respetar la ley 527 de 1999, que define y reglamenta el uso de los mensajes de datos, el comercio electrónico y las firmas digitales |
