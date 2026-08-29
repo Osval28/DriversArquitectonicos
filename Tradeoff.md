@@ -129,13 +129,6 @@ El sistema debe mantener la coherencia de la máquina de estados de la negociaci
 | ESC-CAL-CON-0008 | Si una negociación ya fue cancelada, una respuesta retrasada de otro proceso no debe devolverla accidentalmente a un estado anterior | 0 | 0 | 0 | 0 |
 | ESC-CAL-CON-0009 | Cuando dos usuarios actúan casi simultáneamente sobre una misma negociación, el sistema debe conservar un único estado válido y reconocible | 0 | 0 | 0 | 0 |
 
-**CAR-CON-0004**
-El sistema debe detectar la degradación de sus recursos y ejecutar acciones de mitigación antes de que se produzca una interrupción del servicio
-
-| Código escenario | Descripción del escenario | Comprador | Vendedor | Administrador | Total |
-|:---|:---|---:|---:|---:|---:|
-| ESC-CAL-CON-0010 | Si la plataforma supera las métricas saludables de funcionamiento y se aproxima la caída del sistema, se deben realizar acciones para mitigar daños mayores | 0 | 1 | 1 | 2 |
-
 ### Capacidad de ser auditado
 
 **CAR-AUD-0001**
@@ -197,6 +190,7 @@ El sistema debe poder evolucionar, mantenerse y recuperarse afectando lo menos p
 |:---|:---|---:|---:|---:|---:|
 | ESC-CAL-DIS-0006 | Quiero que el sistema siga funcionando, aunque se metan funcionalidades nuevas cada cierto tiempo | 1 | 1 | 1 | 3 |
 | ESC-CAL-DIS-0007 | Durante mantenimientos planificados, los periodos de indisponibilidad deben reducirse de manera que afecten lo menos posible las operaciones activas en los horarios menos concurridos | 0 | 0 | 0 | 0 |
+| ESC-CAL-DIS-0008 | Si la plataforma presenta una interrupción inesperada, el servicio debe poder restablecerse sin requerir intervención manual prolongada para volver a atender usuarios | 0 | 1 | 1 | 2 |
 
 ### Usabilidad – UX
 
@@ -490,10 +484,6 @@ Los servicios de infraestructura deben poder sustituirse sin modificar las regla
 - `ESC-CAL-CON-0005` — Una notificación de pago recibida dos veces no produce dos efectos económicos
 - `ESC-CAL-CON-0006` — Si un usuario presiona varias veces el botón de confirmar una operación debido a una conexión lenta, debe producirse un único resultado válido
 
-**CAR-CON-0004** — El sistema debe detectar la degradación de sus recursos y ejecutar acciones de mitigación antes de que se produzca una interrupción del servicio
-
-- `ESC-CAL-CON-0010` — Si la plataforma supera las métricas saludables de funcionamiento y se aproxima la caída del sistema, se deben realizar acciones para mitigar daños mayores
-
 ### Auditabilidad
 
 **CAR-AUD-0001** — El sistema debe registrar quien hizo y el momento de cada acción crítica realizada sobre la plataforma
@@ -509,6 +499,8 @@ Los servicios de infraestructura deben poder sustituirse sin modificar las regla
 
 - `ESC-CAL-AUD-0008` — Ante una reclamación, un usuario autorizado debe poder consultar cronológicamente los eventos importantes ocurridos durante una negociación
 
+- `ESC-CAL-AUD-0008` — Ante una reclamación, un usuario autorizado debe poder consultar cronológicamente los eventos importantes ocurridos durante una negociación
+
 ### Disponibilidad
 
 **CAR-DIS-0001**
@@ -520,9 +512,12 @@ El sistema debe seguir prestando sus funciones principales aunque un servicio se
 
 - `ESC-CAL-DIS-0005` — Si un servicio crítico deja de responder, la plataforma informa la falta de servicio sin dejar al usuario en una pantalla bloqueada indefinidamente
 
+- `ESC-CAL-DIS-0005` — Si un servicio crítico deja de responder, la plataforma informa la falta de servicio sin dejar al usuario en una pantalla bloqueada indefinidamente
+
 **CAR-DIS-0003** — El sistema debe poder evolucionar, mantenerse y recuperarse afectando lo menos posible la operación de los usuarios
 
 - `ESC-CAL-DIS-0006` — Quiero que el sistema siga funcionando, aunque se metan funcionalidades nuevas cada cierto tiempo
+- `ESC-CAL-DIS-0008` — Si la plataforma presenta una interrupción inesperada, el servicio debe poder restablecerse sin requerir intervención manual prolongada para volver a atender usuarios
 
 ### Usabilidad
 
@@ -579,19 +574,12 @@ Si un usuario deja su sesión abierta durante un periodo prolongado de inactivid
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | El usuario permanece inactivo en la plataforma durante un periodo de timepo sin realizar ninguna accion |
 | Ambiente | Operación activa de la plataforma con una sesion de usuario abierta |
 | Artefacto | Modulo de gestion de sesiones del sistema |
 | Respuesta | El sistema detecta inactividad prolongada y cierra automaticamente la sesion |
 | Métrica | Todas las sesiones inactivas se cierran automaticamente al superar un timepo de inactividad definido |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-SEG-0004
 
@@ -599,19 +587,12 @@ El sistema debe impedir que usuarios no autorizados accedan o modifiquen informa
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | El usuario intenta acceder a un endpoint al que no está autorizado por medio de consola sin pasar por la interfaz de usuario |
 | Ambiente | Operación activa de la plataforma |
 | Artefacto | Módulo de autorización del sistema |
 | Respuesta | El sistema devuelve al usuario un error advirtiendo que no tiene permiso para hacer eso y el sistema deniega la petición |
 | Métrica | El 100% de las operaciones no autorizadas se rechazan y no se modifica nada en la plataforma |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-SEG-0007
 
@@ -619,19 +600,12 @@ Yo como comprador quiero que mi dinero se retenga en la aplicación hasta confir
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | El usuario hace un pago para encime o compra de un producto |
 | Ambiente | Operación activa de la plataforma |
 | Artefacto | Módulo de pagos del sistema |
 | Respuesta | El sistema retiene el dinero en la pasarela de pagos con posibilidad de reversión en caso de que el encuentro no haya sido exitoso |
 | Métrica | El sistema entrega el dinero al vendedor/persona con producto de mayor valor solamente después de una confirmación de que el encuentro se llevó a cabo exitosamente |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-SEG-0008
 
@@ -639,19 +613,12 @@ Las operaciones sensibles deben estar protegidas contra uso indebido, repetició
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Se intenta ejecutar una operación sensible no autorizada, repetir una solicitud ya realizada o provocar la exposicion de información secreta |
 | Ambiente | Operación normal y procesamiento de operaciones sensibles |
 | Artefacto | Controles de seguridad de autenticación, autorización y ejecución de operaciones sensibles |
 | Respuesta | El sistema valida autorización, evita efectos duplicados y oculta credenciales, tokens y secretos en respuestas y registros no autorizados |
 | Métrica | El 100% de las solicitudes no autorizadas se rechaza y se exponen 0 secretos en las salidas evaluadas |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-CON-0001
 
@@ -659,19 +626,12 @@ Quiero que cuando esté haciendo una transacción y el sistema se caiga el estad
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Fallas en el sistema |
 | Estímulo | El usuario hace un proceso de pago en una compra, propone un intercambio o acepta o rechaza una propuesta y el sistema se cae cuando se está procesando la operación |
 | Ambiente | Operación normal y luego falla que provoca una caída del sistema |
 | Artefacto | Todo el sistema |
 | Respuesta | El sistema deja las operaciones como estaban inmediatamente antes del fallo, con los estados correspondientes que el usuario haya seleccionado |
 | Métrica | El 100% de las operaciones se mantiene con estados coherentes y fieles a las selecciones de los usuarios |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-CON-0002
 
@@ -679,19 +639,12 @@ Las fallas temporales no deben provocar pérdida, duplicación o corrupción de 
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Fallas en el sistema |
 | Estímulo | Ocurre una falla temporal mientras se procesa informacion critica de negocio |
 | Ambiente | Operación normal y luego falla temporal que interrumpe el procesamineto |
 | Artefacto | Todo el sistema |
 | Respuesta | El sistema recupera su estado sin perdida, duplicacion ni corrupcion de la informacion critica una vez reestablecido el servicio |
 | Métrica | Toda la informacion critica evaluada permanece integra, sin perdida ni duplicacion despues de una falla temporal |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-CON-0005
 
@@ -699,19 +652,12 @@ Una notificación de pago recibida dos veces no produce dos efectos económicos
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Proveedor de pagos |
 | Estímulo | Envia dos o mas veces la misma notificación válida correspondiente a una única operación |
 | Ambiente | Operación normal |
 | Artefacto | Integración de pagos |
 | Respuesta | El sistema reconoce que la notificación ya fue procesada y evita ejecutar nuevamente el efecto económico asociado |
 | Métrica | Cada identificador unico de operación debe producir solo 1 efecto económico, aunque una notificación sea recibida varias veces |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-CON-0006
 
@@ -719,58 +665,25 @@ Si un usuario presiona varias veces el botón de confirmar una operación debido
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | El usuario presiona varias veces la confirmación de la operación |
 | Ambiente | Operación de la plataforma con una conexión lenta del usuario |
 | Artefacto | Módulo de lógica de negocio |
 | Respuesta | El sistema confirma la petición y la ejecuta una sola vez |
 | Métrica | El sistema ejecuta la petición realizada por el usuario por más que se haya tocado el botón muchas veces |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
-### ESC-CAL-CON-0010
-
-Si la plataforma supera las métricas saludables de funcionamiento y se aproxima la caída del sistema, se deben realizar acciones para mitigar daños mayores
-
-| Elemento | Descripción |
-|:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
-| Fuente del estímulo | Sistema |
-| Estímulo | Se muestran valores comprometedores de almacenamiento, rendimiento y demás componentes que apuntan a una pronta caída del sistema |
-| Ambiente | Operación normal |
-| Artefacto | Sistema completo |
-| Respuesta | El sistema genera una alerta y ejecuta o habilita las acciones de mitigación previstas antes de que la degradación provoque una interrupción del servicio |
-| Métrica | En pruebas controladas, el 95% de las amenazas se logran controlar antes de que llegue la caída del sistema |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 ### ESC-CAL-AUD-0001
 
 Puede conocerse quién realizó una acción crítica sobre una negociación
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Realiza una acción que modifica el estado de una negociación |
 | Ambiente | Operación normal |
 | Artefacto | Registro de auditoría de negociaciones |
 | Respuesta | El sistema registra la identidad del actor, la acción realizada, la fecha y hora del resultado de la operación |
 | Métrica | El 100% de las acciones críticas evaluadas contiene identificador del actor, acción, fecha/hora y resultado |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-AUD-0003
 
@@ -778,19 +691,12 @@ Cuando un administrador aplique una acción sobre una cuenta o publicación repo
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un administrador |
 | Estímulo | Aplica una medida sobre una cuenta o una publicación reportada |
 | Ambiente | Durante la gestión de reportes y moderación |
 | Artefacto | Funciones administrativas |
 | Respuesta | El sistema conserva evidencia del administrador que ejecutó la acción, el elemento afectado, la acción aplicada y el momento en que ocurrió |
 | Métrica | El 100% de los registros auditables evaluados contienen los campos minimos definidos y se encuentran 0 contraseñas o tokens almacenados en ellos |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-AUD-0004
 
@@ -798,19 +704,12 @@ Cuando un administrador requiera los registros, estos deben conservan informaci�
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un administrador |
 | Estímulo | Hace una consulta de las transacciones de ciertos usuarios con los estados que estas tuvieron a lo largo del tiempo |
 | Ambiente | Operación normal |
 | Artefacto | Logs del sistema y/o acceso a conexión con base de datos |
 | Respuesta | El sistema devuelve al administrador los datos registrados como fecha y hora de realización, confirmación o rechazo de una propuesta |
 | Métrica | El 100% de las transacciones tiene sus respectivos logs con los pasos de los estados que tuvo la transacción |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-AUD-0008
 
@@ -818,19 +717,12 @@ Ante una reclamación, un usuario autorizado debe poder consultar cronológicame
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un administrador |
 | Estímulo | Solicita reconstruir lo ocurrido en una negociación a raiz de una reclamación |
 | Ambiente | Después de que la negociación ha registrado uno o mas cambios de estado |
 | Artefacto | Historial de la negociación |
 | Respuesta | El sistema presenta eventos críticos asociados a la operación ordenados cronológicamente e identificando al actor, acción y resultado |
 | Métrica | La reconstrucción contiene el 100% de los eventos críticos registrados para la operación y los presenta en orden cronológico |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-DIS-0002
 
@@ -838,19 +730,12 @@ Una falla temporal del servicio de correo o notificaciones no debe impedir que c
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Fallas en el o los servicios de notificaciones |
 | Estímulo | El o los servicios de notificaciones se cae |
 | Ambiente | Durante una caída de el o los servicios de notificaciones del sistema |
 | Artefacto | El módulo de notificaciones del sistema |
 | Respuesta | El sistema sigue prestando todos los demás servicios como acceso a publicaciones, compras, intercambios, chat y transacciones |
 | Métrica | El 100% de los servicios externos que no dependen de las notificaciones siguen funcionando aunque este servcio esté caído |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-DIS-0005
 
@@ -858,19 +743,12 @@ Si un servicio crítico deja de responder, la plataforma informa la falta de ser
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Servicio crítico |
 | Estímulo | No responde dentro del tiempo esperado |
 | Ambiente | Operación normal con indisponibilidad parcial |
 | Artefacto | Flujo que depende del servicio y su interfaz con el usuario |
 | Respuesta | El sistema finaliza la espera de forma controlada, informa que la función no está disponible y permite al usuario salir, reintentar o continuar con las funciones no afectadas |
 | Métrica | El 100% de los timeouts simulados termina con una respuesta controlada y se presentan 0 pantallas bloqueadas indefinidamente |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-DIS-0006
 
@@ -878,19 +756,25 @@ Quiero que el sistema siga funcionando, aunque se metan funcionalidades nuevas c
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Equipo de desarrollo |
 | Estímulo | Despliega una nueva versión que incorpora o modifica funcionalidades |
 | Ambiente | Actualización planificada de la plataforma en producción |
 | Artefacto | Plataforma y sus flujos principales existentes |
 | Respuesta | El sistema incorpora la nueva versión manteniendo operativas las funcionalidades no afectadas y sin introducir fallos en los flujos principales existentes |
 | Métrica | Después del despliegue, el 100% de los flujos críticos incluidos en la prueba de regresión continúa funcionando y se producen 0 interrupciones |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
+
+### ESC-CAL-DIS-0008
+
+Si la plataforma presenta una interrupción inesperada, el servicio debe poder restablecerse sin requerir intervención manual prolongada para volver a atender usuarios
+
+| Elemento | Descripción |
+|:---|:---|
+| Fuente del estímulo | Falla inesperada |
+| Estímulo | Provoca la interrupción total o parcial de un componente recuperable |
+| Ambiente | Operación en producción |
+| Artefacto | Servicios de ejecución |
+| Respuesta | El sistema detecta la falla e intenta restablecer automáticamente el componente para volver a atender solicitudes sin requerir intervención manual prolongada |
+| Métrica | En pruebas controladas, el 100% de las fallas recuperables definidas restablece el servicio automaticamente |
 
 ### ESC-CAL-USA-0004
 
@@ -898,19 +782,12 @@ Cuando un usuario complete correctamente una operación, la interfaz debe indica
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Completa correctamente una operación dentro de la plataforma |
 | Ambiente | Operación normal de la plataforma |
 | Artefacto | Interfaz donde se ejecuta la operación |
 | Respuesta | El sistema muestra inmediatamente un mensaje o indicador visual confirmando que la accion se realizo con éxito |
-| Métrica | El 100% de las operaciones completadas exitosamente muestran una confirmacion visible en un tiempo aproximado de 4 segundos |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
+| Métrica | El 100% de las operaciones completadas exitosamente muestran una confirmacion visible en un tiempo menor o igual a 1 segundo |
 
 ### ESC-CAL-USA-0005
 
@@ -918,19 +795,12 @@ El usuario debe poder identificar fácilmente en qué estado se encuentra una ne
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Accede a la información de una operación para verificar su estado |
 | Ambiente | Operación normal del sistema |
 | Artefacto | Módulo encargado de brindar información sobre las operaciones del mismo usuario |
 | Respuesta | El sistema muestra los estados de las operaciones consistentemente con colores ilustrativos que reflejen el estado de la operación |
 | Métrica | Una cantidad de usuarios mayor o igual al 90% identifica si la propuesta ha sido rechazada, aceptada, finalizada u otro estado de la operación |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-USA-0006
 
@@ -938,19 +808,12 @@ Al realizar una propuesta de intercambio, debe diferenciarse claramente qué pro
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Consulta o prepara una propuesta para decidir si continuar con la negociación |
 | Ambiente | Durante una propuesta o contraoferta activa |
 | Artefacto | Interfaz de propuestas y contraofertas |
 | Respuesta | El sistema diferencia visual y textualmente qué entrega cada parte, qué recibe y el dinero adicional involucrado cuando aplique |
 | Métrica | Al menos el 90% de los usuarios evaluados identifica correctamente qué entrega, qué recibe y si existe dinero adicional antes de confirmar la propuesta |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-USA-0009
 
@@ -958,19 +821,12 @@ Los mensajes de error deben ser suficientemente claros para los usuarios, con de
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Comete un error de entrada o ejecuta una acción que no puede completarse |
 | Ambiente | Uso normal de formularios y flujos interactivos |
 | Artefacto | Interfaz donde se produce el error |
 | Respuesta | El sistema explica el problema en lenguaje natural, identifica qué debe corregirse y orienta al usuario sobre como continuar |
 | Métrica | Al menos el 90% de los usuarios evaluados identifica la causa y corrige el error sin asistencia |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-USA-0013
 
@@ -978,19 +834,12 @@ Los flujos principales deben ser comprensibles para usuarios con distintos nivel
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Intenta completar uno de los flujos principales de la plataforma |
 | Ambiente | Primera utilización bajo condiciones normales de operación |
 | Artefacto | Interfaces de los flujos principales de la plataforma |
 | Respuesta | El sistema presenta instrucciones, opciones y retroalimentación suficientes para que el usuario comprenda qué ocurre y pueda avanzar por el flujo |
 | Métrica | Al menos el 90% de los usuarios representativos completa correctamente el flujo principal evaluado sin asistencia externa |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-USA-0015
 
@@ -998,19 +847,12 @@ Antes de confirmar una compra, intercambio o acción importante, el usuario debe
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Va a confirmar una compra o intercambio |
 | Ambiente | Operación normal de la plataforma |
 | Artefacto | El módulo de lógica de negocio |
 | Respuesta | El sistema muestra una ventana de confirmación al confirmar una compra o un intercambio con un mensaje |
 | Métrica | Al menos el 90% de los usuarios debe comprender qué está aceptando en una compra/intercambio y cuál es el siguiente paso a seguir en la negociación |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-ESC-0003
 
@@ -1018,19 +860,12 @@ Quiero que si hay mucha gente comprando en un pico específico de tráfico como 
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Varios usuarios |
 | Estímulo | Genera un pico de solicitudes por una fecha o evento de alta demanda, como Black Friday o temporada navideña |
 | Ambiente | Periodo de demanda significativamente superior a la operación habitual |
 | Artefacto | Plataforma y recursos que atienden a las solicitudes |
 | Respuesta | El sistema absorbe el incremento de carga o degrada de forma controlada sin producir una caída general de la plataforma |
 | Métrica | En la prueba de carga con el volumen pico objetivo, la plataforma presenta 0 caídas generales y mantiene operativos los flujos críticos |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-REN-0001
 
@@ -1038,19 +873,12 @@ Quiero que si el número de usuarios diarios sube mucho la plataforma siga demor
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Usuarios concurrentes |
 | Estímulo | Aumentan considerablemente el número de solicitudes realizadas sobre las funcionalidades principales |
 | Ambiente | Periodo de alta carga dentro del volumen objetivo definido para la prueba |
 | Artefacto | Operaciones principales de la plataforma |
 | Respuesta | El sistema procesa las solicitudes sin superar el tiempo de respuesta establecido para las operaciones principales |
 | Métrica | Las operaciones principales evaluadas responden en un tiempo menor o igual a 3 segundos bajo la carga objetivo demanda |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-REN-0004
 
@@ -1058,19 +886,12 @@ Quiero que los usuarios no tengan congelamientos en pantallas que tengan muchas 
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Entra a la pantalla principal o entra a una publicación específica |
 | Ambiente | Operación normal de la plataforma |
 | Artefacto | Funcionalidades encargadas de mostrar las publicaciones con sus detalles |
 | Respuesta | El sistema muestra todos los datos configurados para verse de la publicación como imágenes, descrpición, título de la forma en que fue diseñado |
 | Métrica | El sistema responde a clicks en publicaciones en un tiempo menor o igual a 3s |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-REN-0010
 
@@ -1078,19 +899,12 @@ Los mensajes enviados durante una negociación aparecen en 2s máximo para la ot
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Un usuario |
 | Estímulo | Envía un mensaje a la otra parte mediante el chat |
 | Ambiente | Negociación activa y operación normal |
 | Artefacto | Servicio e interfaz de mensajería de la plataforma |
 | Respuesta | El sistema procesa el mensaje y lo pone a disposición del destinatario actualizando la conversación |
 | Métrica | El mensaje aparece disponible para la otra parte en un tiempo máximo de 2 segundos desde su envío |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
 
 ### ESC-CAL-CAP-0006
 
@@ -1098,16 +912,9 @@ El sistema debe identificar cuando se aproxima a ciertos limites operativos ante
 
 | Elemento | Descripción |
 |:---|:---|
-| Quality Attribute |  |
-| Priority |  |
-| Difficulty / Risk |  |
-| Status |  |
 | Fuente del estímulo | Muchos usuarios utilizando el sistema |
 | Estímulo | Se aproxima a uno de los limites operativos configurados para la plataforma |
 | Ambiente | Alta carga de procesamiento o almacenamiento |
 | Artefacto | Mecanismos de monitoreo |
 | Respuesta | El sistema detecta que se está utilizando una gran cantidad de recursos del servidor y manda una alerta a los administradores |
 | Métrica | El 100% de los umbrales operativos configurados y probados envía una alerta antes de alcanzar el nivel de saturación asociado |
-| Business Rationale |  |
-| Architectural Tactics |  |
-| Assumptions & Risks |  |
